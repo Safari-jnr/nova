@@ -1,0 +1,9 @@
+let name = "Nova"
+let age = 1
+let version = 1.0
+
+let message = "Hello ${name}, version ${version}"
+print(message)
+
+let info = "You are ${age} day old!"
+print(info)

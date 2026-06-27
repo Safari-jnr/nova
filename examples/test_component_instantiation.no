@@ -1,0 +1,34 @@
+// Phase 2.2: Component Instantiation Test
+
+print("=== Testing Component Instantiation ===")
+
+component Counter {
+  state = {
+    count: 0
+  }
+  
+  methods = {
+    increment: "placeholder"
+  }
+  
+  fn render() {
+    print("Rendering Counter")
+  }
+}
+
+print("Component Counter defined")
+
+// Instantiate the component
+let counter = Counter()
+
+print("Component instantiated!")
+print("Instance:")
+print(counter)
+
+print("\n=== Testing Component Instance Properties ===")
+
+// Access component name
+print("Component name:")
+print(counter.__component__)
+
+print("\n=== All Component Instantiation Tests Passed! ===")

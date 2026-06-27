@@ -1,0 +1,15 @@
+let num = 16
+
+let root = sqrt(num)
+print(root)
+
+let power = pow(2, 3)
+print(power)
+
+let negative = -5
+let positive = abs(negative)
+print(positive)
+
+let decimal = 3.7
+let rounded = round(decimal)
+print(rounded)

@@ -1,0 +1,10 @@
+let name = "hello world"
+
+let upper = toUpper(name)
+print(upper)
+
+let lower = toLower("HELLO")
+print(lower)
+
+let parts = split("a,b,c", ",")
+print(len(parts))

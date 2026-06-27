@@ -1,0 +1,71 @@
+// Test increment and decrement operators in Nova
+
+print("=== Prefix Increment (++x) ===")
+let a = 5
+print("Initial: 5")
+print("++a returns:")
+print(++a)
+print("a is now:")
+print(a)
+
+print("\n=== Postfix Increment (x++) ===")
+let b = 5
+print("Initial: 5")
+print("b++ returns:")
+print(b++)
+print("b is now:")
+print(b)
+
+print("\n=== Prefix Decrement (--x) ===")
+let c = 10
+print("Initial: 10")
+print("--c returns:")
+print(--c)
+print("c is now:")
+print(c)
+
+print("\n=== Postfix Decrement (x--) ===")
+let d = 10
+print("Initial: 10")
+print("d-- returns:")
+print(d--)
+print("d is now:")
+print(d)
+
+print("\n=== In Expressions ===")
+let x = 5
+let result = x++ * 2
+print("x++ * 2 where x=5:")
+print(result)
+print("x is now:")
+print(x)
+
+let y = 5
+let result2 = ++y * 2
+print("++y * 2 where y=5:")
+print(result2)
+print("y is now:")
+print(y)
+
+print("\n=== In Loops ===")
+let counter = 0
+for i in 1..4 {
+  counter++
+}
+print("Counter after 3 iterations:")
+print(counter)
+
+print("\n=== Multiple Operations ===")
+let n = 10
+n++
+n++
+++n
+print("After n++, n++, ++n (started at 10):")
+print(n)
+
+n--
+--n
+print("After n--, --n:")
+print(n)
+
+print("\n=== All increment/decrement tests completed! ===")

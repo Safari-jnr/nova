@@ -1,0 +1,12 @@
+fn sum(arr) {
+  let total = 0
+  for num in arr {
+    total = total + num
+  }
+  return total
+}
+
+let numbers = [10, 20, 30, 40]
+let result = sum(numbers)
+
+print(result)

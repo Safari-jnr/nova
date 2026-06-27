@@ -1,0 +1,57 @@
+// Phase 2.1: Basic Component Declaration Test
+
+print("=== Testing Basic Component Declaration ===")
+
+component HelloWorld {
+  state = {
+    message: "Hello from Nova!"
+  }
+  
+  fn render() {
+    print("Rendering HelloWorld component")
+  }
+}
+
+print("Component HelloWorld defined successfully!")
+
+print("\n=== Testing Component with Methods ===")
+
+component Counter {
+  state = {
+    count: 0
+  }
+  
+  methods = {
+    increment: "placeholder"
+  }
+  
+  fn render() {
+    print("Counter component render")
+  }
+}
+
+print("Component Counter defined successfully!")
+
+print("\n=== Testing Component with Lifecycle ===")
+
+component LifecycleTest {
+  state = {
+    data: null
+  }
+  
+  onMount() {
+    print("Component mounted!")
+  }
+  
+  onUnmount() {
+    print("Component will unmount!")
+  }
+  
+  fn render() {
+    print("LifecycleTest rendering")
+  }
+}
+
+print("Component LifecycleTest defined successfully!")
+
+print("\n=== All Component Declaration Tests Passed! ===")

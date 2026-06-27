@@ -1,0 +1,61 @@
+component WebSocketTest {
+  state = {
+    appName: "WebSocket Test"
+  }
+  
+  fn render() {
+    print("🔌 Starting WebSocket test server...")
+    
+    let ui = view {
+      Container(padding: 0, backgroundColor: "#f5f7fa") {
+        Container(padding: 35, backgroundColor: "#2c3e50") {
+          Text("🔌 WebSocket Test", size: 44, weight: "bold", color: "#ffffff")
+          Text("Real-time Communication", size: 16, color: "#ecf0f1")
+        }
+        
+        Container(padding: 40) {
+          Container(padding: 30, backgroundColor: "#3498db") {
+            Text("✅ Server Running", size: 24, weight: "bold", color: "#ffffff")
+            Text("ws://localhost:8080", size: 16, color: "#ecf0f1")
+          }
+          
+          Container(margin: 30, padding: 25, backgroundColor: "#ffffff") {
+            Text("📡 Test Instructions:", size: 22, weight: "bold")
+            
+            Container(margin: 15) {
+              Text("1. Press F12 to open DevTools", size: 16)
+              Text("2. Go to Console tab", size: 16)
+              Text("3. Copy and paste this code:", size: 16)
+            }
+            
+            Container(margin: 15, padding: 20, backgroundColor: "#ecf0f1") {
+              Text("const ws = new WebSocket('ws://localhost:8080');", size: 13)
+              Text("ws.onmessage = (e) => console.log('Got:', e.data);", size: 13)
+              Text("ws.send(JSON.stringify({type:'broadcast',content:'Hi!'}));", size: 13)
+            }
+          }
+          
+          Container(margin: 30, padding: 25, backgroundColor: "#d5f4e6") {
+            Text("✅ Features Working:", size: 20, weight: "bold", color: "#27ae60")
+            
+            Container(margin: 10) {
+              Text("✅ WebSocket connections", size: 16, color: "#27ae60")
+              Text("✅ Broadcast messages", size: 16, color: "#27ae60")
+              Text("✅ Multiple clients", size: 16, color: "#27ae60")
+              Text("✅ Real-time updates", size: 16, color: "#27ae60")
+            }
+          }
+        }
+      }
+    }
+    
+    return ui
+  }
+}
+
+let app = WebSocketTest()
+let ui = app.render()
+
+print("🚀 Starting servers...")
+serveHTTP(ui, 3000)
+startWebSocket(8080)

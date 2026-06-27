@@ -1,0 +1,63 @@
+// Phase 2.4: 'this' Binding in Render Functions
+
+print("=== Phase 2.4: this.state in Render ===\n")
+
+component Counter {
+  state = {
+    count: 5,
+    label: "Current Count",
+    active: true
+  }
+  
+  fn render() {
+    print("Rendering Counter:")
+    print("  Label from this.state:")
+    print(this.state.label)
+    print("  Count from this.state:")
+    print(this.state.count)
+    print("  Active from this.state:")
+    print(this.state.active)
+  }
+}
+
+let counter = Counter()
+print("Counter created with state:")
+print(counter.state)
+print("")
+
+print("Calling counter.render() - 'this' should be bound:")
+counter.render()
+
+print("\n---\n")
+
+component Profile {
+  state = {
+    user: {
+      name: "Alice",
+      age: 25
+    },
+    bio: "Software Developer"
+  }
+  
+  fn render() {
+    print("Rendering Profile:")
+    print("  Name:")
+    print(this.state.user.name)
+    print("  Age:")
+    print(this.state.user.age)
+    print("  Bio:")
+    print(this.state.bio)
+  }
+}
+
+let profile = Profile()
+print("Profile created")
+print("")
+
+print("Calling profile.render():")
+profile.render()
+
+print("\n=== Phase 2.4 Complete! ===")
+print("✅ this.state works inside render!")
+print("✅ Nested state access works!")
+print("✅ Full component lifecycle working!")

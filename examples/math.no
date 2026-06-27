@@ -1,0 +1,9 @@
+let x = 10
+let y = 20
+let sum = x + y
+let product = x * y
+let difference = y - x
+
+print(sum)
+print(product)
+print(difference)

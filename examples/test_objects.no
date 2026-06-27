@@ -1,0 +1,52 @@
+// Test objects/dictionaries in Nova
+
+print("=== Basic Object Creation ===")
+let user = {
+  name: "Alice",
+  age: 25,
+  city: "New York"
+}
+print(user)
+
+print("=== Object Property Access ===")
+print(user.name)
+print(user.age)
+print(user.city)
+
+print("=== Object with Different Types ===")
+let mixed = {
+  text: "Hello",
+  number: 42,
+  bool: true,
+  empty: null
+}
+print(mixed.text)
+print(mixed.number)
+print(mixed.bool)
+print(mixed.empty)
+
+print("=== Nested Objects ===")
+let person = {
+  name: "Bob",
+  address: {
+    street: "123 Main St",
+    city: "Boston"
+  }
+}
+print(person.name)
+print(person.address)
+print(person.address.city)
+
+print("=== Objects with Arrays ===")
+let data = {
+  numbers: [1, 2, 3],
+  names: ["Alice", "Bob", "Charlie"]
+}
+print(data.numbers)
+print(data.names)
+
+print("=== Empty Object ===")
+let empty = {}
+print(empty)
+
+print("=== All object tests completed! ===")

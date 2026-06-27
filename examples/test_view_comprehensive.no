@@ -1,0 +1,99 @@
+// Phase 2.5: Comprehensive View Syntax Test
+
+print("=== Phase 2.5: View Syntax & UI Components ===\n")
+
+// Test 1: Simple Text component
+print("Test 1: Simple Text Component")
+component SimpleText {
+  state = {
+    message: "Hello Nova!"
+  }
+  
+  fn render() {
+    let ui = view {
+      Text("Hello World")
+    }
+    print("Simple text UI:")
+    print(ui)
+  }
+}
+
+let app1 = SimpleText()
+app1.render()
+
+print("\n---\n")
+
+// Test 2: Text with named props
+print("Test 2: Text with Named Props")
+component StyledText {
+  state = {
+    color: "blue"
+  }
+  
+  fn render() {
+    let ui = view {
+      Text(text: "Styled Text", size: 24, color: "blue")
+    }
+    print("Styled text UI:")
+    print(ui)
+  }
+}
+
+let app2 = StyledText()
+app2.render()
+
+print("\n---\n")
+
+// Test 3: Container with children
+print("Test 3: Container with Children")
+component Layout {
+  state = {
+    title: "My App"
+  }
+  
+  fn render() {
+    let ui = view {
+      Container(padding: 20) {
+        Text("Title")
+        Text("Subtitle")
+      }
+    }
+    print("Container with children:")
+    print(ui)
+  }
+}
+
+let app3 = Layout()
+app3.render()
+
+print("\n---\n")
+
+// Test 4: Nested components
+print("Test 4: Nested Components")
+component NestedLayout {
+  state = {
+    data: "content"
+  }
+  
+  fn render() {
+    let ui = view {
+      Container(backgroundColor: "white") {
+        Container(padding: 10) {
+          Text("Nested Text")
+        }
+      }
+    }
+    print("Nested layout:")
+    print(ui)
+  }
+}
+
+let app4 = NestedLayout()
+app4.render()
+
+print("\n=== All View Syntax Tests Complete! ===")
+print(" Simple components work")
+print(" Named props work")
+print(" Shorthand syntax works")
+print(" Container with children works")
+print(" Nested components work")

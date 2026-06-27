@@ -1,0 +1,53 @@
+// HTTP Server Runtime Test
+
+print("=== Nova Web Server ===\n")
+
+component WebApp {
+  state = {
+    title: "Nova Web Application",
+    description: "Full-stack framework with built-in database",
+    features: [
+      "Component-based UI",
+      "Built-in state management",
+      "Native database support",
+      "HTTP server included"
+    ]
+  }
+  
+  fn render() {
+    let ui = view {
+      Container(padding: 30, backgroundColor: "#ffffff") {
+        Text(this.state.title, size: 42, weight: "bold", color: "#2c3e50")
+        Text(this.state.description, size: 18, color: "#7f8c8d")
+        
+        Container(margin: 30, padding: 25, backgroundColor: "#ecf0f1") {
+          Text("Features", size: 28, weight: "bold", color: "#34495e")
+          Text("✨ Component-based UI", size: 18)
+          Text("🎨 Built-in state management", size: 18)
+          Text("🗄️  Native database support", size: 18)
+          Text("🚀 HTTP server included", size: 18)
+        }
+        
+        Container(margin: 20) {
+          Button("Get Started", color: "#3498db", size: 18)
+          Button("Documentation", color: "#2ecc71", size: 18)
+          Button("GitHub", color: "#95a5a6", size: 18)
+        }
+        
+        Container(margin: 30, padding: 20, backgroundColor: "#d5f4e6") {
+          Text("🎉 Server is running!", size: 20, weight: "bold", color: "#27ae60")
+          Text("This page is served by Nova's built-in HTTP server")
+        }
+      }
+    }
+    
+    print("Starting HTTP Server on port 3000...")
+    print("Open http://localhost:3000 in your browser!")
+    print("\nPress Ctrl+C to stop the server\n")
+    
+    serveHTTP(ui, 3000)
+  }
+}
+
+let app = WebApp()
+app.render()

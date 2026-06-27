@@ -1,0 +1,59 @@
+// Phase 2.5+: Built-in Component Rendering - Save HTML
+
+print("=== Nova UI Builder ===\n")
+
+component MyApp {
+  state = {
+    title: "Welcome to Nova",
+    subtitle: "Build amazing UIs with ease",
+    features: ["Fast", "Modern", "Simple"],
+    user: {
+      name: "Alice",
+      role: "Developer"
+    }
+  }
+  
+  fn render() {
+    let ui = view {
+      Container(padding: 30, backgroundColor: "#ffffff") {
+        Text(this.state.title, size: 36, weight: "bold", color: "#2c3e50")
+        Text(this.state.subtitle, size: 18, color: "#7f8c8d")
+        
+        Container(margin: 20, padding: 20, backgroundColor: "#ecf0f1") {
+          Text("User Profile", size: 24, weight: "bold", color: "#34495e")
+          Text(this.state.user.name, size: 18, color: "#3498db")
+          Text(this.state.user.role, size: 16, color: "#95a5a6")
+        }
+        
+        Container(margin: 20) {
+          Text("Quick Actions", size: 20, weight: "bold")
+          Button("Get Started", color: "#3498db", size: 16)
+          Button("View Docs", color: "#2ecc71", size: 16)
+          Button("Contact Us", color: "#e74c3c", size: 16)
+        }
+        
+        Container(margin: 20, padding: 15, backgroundColor: "#fff3cd") {
+          Text("Features", size: 18, weight: "bold")
+          Text("✨ Fast compilation")
+          Text("🎨 Beautiful UI")
+          Text("🚀 Easy to learn")
+        }
+      }
+    }
+    
+    print("📱 Console View:")
+    print(renderConsole(ui))
+    
+    print("\n💾 Saving HTML...")
+    let html = renderHTML(ui)
+    let result = writeFile("output.html", html)
+    print(result)
+    
+    print("\n✅ Done! Open output.html in your browser!")
+  }
+}
+
+let app = MyApp()
+app.render()
+
+print("\n=== Build Complete ===")

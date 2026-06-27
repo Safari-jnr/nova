@@ -1,0 +1,8 @@
+let name = "World"
+let age = 25
+
+fn double(n) {
+  return n * 2
+}
+
+let result = double(10)

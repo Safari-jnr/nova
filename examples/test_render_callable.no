@@ -1,0 +1,25 @@
+// Phase 2.3: Callable Render Function
+
+print("=== Phase 2.3: Callable Render ===\n")
+
+component SimpleComponent {
+  state = {
+    message: "Hello from component!"
+  }
+  
+  fn render() {
+    print("Render function called!")
+    print("Inside render function")
+  }
+}
+
+let comp = SimpleComponent()
+print("Component created")
+print("Component state:")
+print(comp.state)
+print("")
+
+print("Now calling render()...")
+comp.render()
+
+print("\n=== Test Complete ===")

@@ -1,0 +1,51 @@
+// Terminal UI Runtime Test
+
+print("=== Nova Terminal UI ===\n")
+
+component Dashboard {
+  state = {
+    appName: "Nova Dashboard",
+    version: "1.0.0",
+    user: {
+      name: "Alice",
+      role: "Admin"
+    },
+    stats: {
+      users: 1250,
+      revenue: 50000
+    }
+  }
+  
+  fn render() {
+    let ui = view {
+      Container(padding: 20, backgroundColor: "#2c3e50") {
+        Text(this.state.appName, size: 36, weight: "bold", color: "cyan")
+        Text(this.state.version, size: 16, color: "yellow")
+        
+        Container(margin: 20, padding: 15, backgroundColor: "#34495e") {
+          Text("User Profile", size: 24, weight: "bold", color: "green")
+          Text(this.state.user.name, size: 18, color: "blue")
+          Text(this.state.user.role, size: 16, color: "yellow")
+        }
+        
+        Container(margin: 20) {
+          Text("Statistics", size: 20, weight: "bold")
+          Text("Active Users: 1250", color: "green")
+          Text("Revenue: $50,000", color: "cyan")
+        }
+        
+        Container(margin: 20) {
+          Button("Refresh Data", color: "blue")
+          Button("Export Report", color: "green")
+          Button("Settings", color: "yellow")
+        }
+      }
+    }
+    
+    print("Rendering to Terminal...")
+    renderTerminal(ui)
+  }
+}
+
+let app = Dashboard()
+app.render()

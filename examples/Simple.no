@@ -1,0 +1,14 @@
+let x = 10
+let y = 20
+
+fn add(a, b) {
+  return a + b
+}
+
+let result = add(x, y)
+
+if x > 5 {
+  let bigger = true
+}
+
+let nums = [1, 2, 3]

@@ -1,0 +1,43 @@
+// Phase 2.5+: Built-in Component Rendering Test
+
+print("=== Built-in Component Rendering ===\n")
+
+component MyApp {
+  state = {
+    title: "Welcome to Nova",
+    subtitle: "Build amazing UIs",
+    user: {
+      name: "Alice",
+      theme: "dark"
+    }
+  }
+  
+  fn render() {
+    let ui = view {
+      Container(padding: 20, backgroundColor: "white") {
+        Text(this.state.title, size: 32, weight: "bold", color: "#333")
+        Text(this.state.subtitle, size: 18, color: "#666")
+        
+        Container(margin: 20, padding: 15, backgroundColor: "#f0f0f0") {
+          Text("User Info", size: 20, weight: "bold")
+          Text(this.state.user.name, color: "blue")
+        }
+        
+        Button("Get Started", color: "#007bff", size: 16)
+        Button("Learn More", color: "#28a745")
+      }
+    }
+    
+    print("Console Rendering:")
+    print(renderConsole(ui))
+    
+    print("\nHTML Output saved to output.html")
+    let html = renderHTML(ui)
+    print(html)
+  }
+}
+
+let app = MyApp()
+app.render()
+
+print("\n=== Rendering Complete ===")

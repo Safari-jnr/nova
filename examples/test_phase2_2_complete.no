@@ -1,0 +1,105 @@
+// Phase 2.2 Complete: Full Component Test
+
+print("=== Phase 2.2: Component Instantiation Complete ===\n")
+
+// Test 1: Component with State
+print("Test 1: Component with Initialized State")
+component Counter {
+  state = {
+    count: 0,
+    name: "My Counter",
+    active: true
+  }
+  
+  methods = {
+    increment: "fn"
+  }
+  
+  fn render() {
+    print("Rendering Counter")
+  }
+}
+
+let counter = Counter()
+print("Counter instance created!")
+print("State:")
+print(counter.state)
+print("\nIndividual state properties:")
+print("  count:")
+print(counter.state.count)
+print("  name:")
+print(counter.state.name)
+print("  active:")
+print(counter.state.active)
+
+print("\n---\n")
+
+// Test 2: Component with Complex State
+print("Test 2: Component with Nested State")
+component Profile {
+  state = {
+    user: {
+      name: "Alice",
+      age: 25
+    },
+    settings: {
+      theme: "dark",
+      notifications: true
+    }
+  }
+  
+  fn render() {
+    print("Rendering Profile")
+  }
+}
+
+let profile = Profile()
+print("Profile instance created!")
+print("Nested state:")
+print(profile.state.user)
+print("\nUser name:")
+print(profile.state.user.name)
+
+print("\n---\n")
+
+// Test 3: Component with Array State
+print("Test 3: Component with Array in State")
+component TodoList {
+  state = {
+    items: ["Task 1", "Task 2", "Task 3"],
+    count: 3
+  }
+  
+  fn render() {
+    print("Rendering TodoList")
+  }
+}
+
+let todos = TodoList()
+print("TodoList instance created!")
+print("Items:")
+print(todos.state.items)
+print("First item:")
+print(todos.state.items[0])
+
+print("\n---\n")
+
+// Test 4: Multiple Instances
+print("Test 4: Multiple Component Instances")
+let counter1 = Counter()
+let counter2 = Counter()
+print("Two counter instances created!")
+print("Counter1 component name:")
+print(counter1.__component__)
+print("Counter2 component name:")
+print(counter2.__component__)
+print("Both have independent state:")
+print(counter1.state.count)
+print(counter2.state.count)
+
+print("\n=== All Phase 2.2 Tests Passed! ===")
+print("✅ Component instantiation working")
+print("✅ State initialization with values working")
+print("✅ Nested state working")
+print("✅ Array state working")
+print("✅ Multiple instances working")

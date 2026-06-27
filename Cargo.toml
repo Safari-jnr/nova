@@ -1,0 +1,33 @@
+[package]
+name = "nova"
+version = "1.0.0"
+edition = "2021"
+authors = ["Nova Dev"]
+
+[[bin]]
+name = "nova"
+path = "src/main.rs"
+
+[dependencies]
+# CLI & Error Handling
+clap = { version = "4.5", features = ["derive"] }
+anyhow = "1.0"
+thiserror = "1.0"
+colored = "2.1"
+
+# Data & Utilities
+rustc-hash = "2.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+regex = "1.10"
+chrono = "0.4"
+
+# Async & Networking
+tokio = { version = "1.40", features = ["full"] }
+async-trait = "0.1"
+reqwest = { version = "0.12", features = ["json"] }
+tokio-tungstenite = "0.21"
+futures-util = "0.3"
+
+[profile.release]
+opt-level = 3

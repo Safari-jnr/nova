@@ -1,0 +1,10 @@
+let x = 42
+let s = "hello"
+let arr = [1, 2, 3]
+
+print(type(x))
+print(type(s))
+print(type(arr))
+
+let converted = str(x)
+print(converted)

@@ -1,0 +1,9 @@
+fn greet(name, age) {
+  let message = "Hello ${name}! You are ${age} years old."
+  return message
+}
+
+for i in 1..4 {
+  let msg = greet("User", i)
+  print(msg)
+}

@@ -1,0 +1,39 @@
+// Test ternary operator in Nova
+
+print("=== Basic Ternary ===")
+let age = 20
+let status = age >= 18 ? "adult" : "minor"
+print(status)
+
+print("\n=== Ternary with Numbers ===")
+let x = 5
+let y = 10
+let max = x > y ? x : y
+print("Max of 5 and 10:")
+print(max)
+
+print("\n=== Nested Ternary ===")
+let score = 85
+let grade = score >= 90 ? "A" : score >= 80 ? "B" : score >= 70 ? "C" : "F"
+print("Score 85 gets grade:")
+print(grade)
+
+print("\n=== Ternary in Expressions ===")
+let a = 3
+let b = 7
+let result = (a > b ? a : b) * 2
+print("Max * 2:")
+print(result)
+
+print("\n=== Ternary with Booleans ===")
+let is_valid = true
+let message = is_valid ? "Access granted" : "Access denied"
+print(message)
+
+print("\n=== Ternary in Loops ===")
+for i in 1..6 {
+  let label = i % 2 == 0 ? "even" : "odd"
+  print(label)
+}
+
+print("\n=== All ternary tests completed! ===")

@@ -1,0 +1,131 @@
+// ═══════════════════════════════════════════════════════════════════
+// TaskFlow - Live Web Server Version
+// Access at: http://localhost:3000
+// ═══════════════════════════════════════════════════════════════════
+
+print("╔══════════════════════════════════════════════════╗")
+print("║    TaskFlow - Starting Web Server...            ║")
+print("╚══════════════════════════════════════════════════╝\n")
+
+component TaskFlowApp {
+  state = {
+    appName: "TaskFlow",
+    version: "1.0.0",
+    user: { name: "Alex Morgan", role: "Project Manager" },
+    stats: {
+      totalTasks: 6,
+      completedTasks: 1,
+      inProgressTasks: 2,
+      todoTasks: 3
+    },
+    tasks: [
+      { id: 1, title: "Design landing page", status: "in-progress", priority: "high" },
+      { id: 2, title: "Implement authentication", status: "todo", priority: "high" },
+      { id: 3, title: "Write documentation", status: "todo", priority: "medium" },
+      { id: 4, title: "User testing", status: "done", priority: "medium" },
+      { id: 5, title: "Deploy to production", status: "todo", priority: "high" },
+      { id: 6, title: "Bug fixes", status: "in-progress", priority: "low" }
+    ]
+  }
+  
+  fn render() {
+    let ui = view {
+      Container(padding: 0, backgroundColor: "#f0f2f5") {
+        Container(padding: 40, backgroundColor: "#2c3e50") {
+          Text(this.state.appName, size: 48, weight: "bold", color: "#ffffff")
+          Text("Task Management System", size: 20, color: "#ecf0f1")
+          Text("v1.0.0", size: 14, color: "#95a5a6")
+        }
+        
+        Container(padding: 40) {
+          Container(padding: 30, backgroundColor: "#ffffff") {
+            Text("Welcome, Alex Morgan", size: 28, weight: "bold", color: "#2c3e50")
+            Text(this.state.user.role, size: 16, color: "#7f8c8d")
+          }
+          
+          Container(margin: 30) {
+            Text("Dashboard Overview", size: 24, weight: "bold")
+            
+            Container(margin: 20) {
+              Container(padding: 30, backgroundColor: "#3498db") {
+                Text("Total Tasks", size: 18, weight: "bold", color: "#ffffff")
+                Text(this.state.stats.totalTasks, size: 52, weight: "bold", color: "#ffffff")
+                Text("All active tasks", size: 14, color: "#ecf0f1")
+              }
+              
+              Container(padding: 30, backgroundColor: "#2ecc71") {
+                Text("Completed", size: 18, weight: "bold", color: "#ffffff")
+                Text(this.state.stats.completedTasks, size: 52, weight: "bold", color: "#ffffff")
+                Text("Tasks finished", size: 14, color: "#ecf0f1")
+              }
+              
+              Container(padding: 30, backgroundColor: "#e74c3c") {
+                Text("In Progress", size: 18, weight: "bold", color: "#ffffff")
+                Text(this.state.stats.inProgressTasks, size: 52, weight: "bold", color: "#ffffff")
+                Text("Currently working", size: 14, color: "#ecf0f1")
+              }
+              
+              Container(padding: 30, backgroundColor: "#f39c12") {
+                Text("Todo", size: 18, weight: "bold", color: "#ffffff")
+                Text(this.state.stats.todoTasks, size: 52, weight: "bold", color: "#ffffff")
+                Text("Pending tasks", size: 14, color: "#ecf0f1")
+              }
+            }
+          }
+          
+          Container(margin: 40, padding: 30, backgroundColor: "#ffffff") {
+            Text("Recent Tasks", size: 24, weight: "bold", color: "#2c3e50")
+            
+            Container(margin: 20, padding: 20, backgroundColor: "#f8f9fa") {
+              Text("🔴 Design landing page", size: 18, weight: "bold", color: "#e74c3c")
+              Text("Status: In Progress | Priority: High", size: 14, color: "#7f8c8d")
+            }
+            
+            Container(margin: 20, padding: 20, backgroundColor: "#f8f9fa") {
+              Text("🔴 Implement authentication", size: 18, weight: "bold", color: "#e74c3c")
+              Text("Status: Todo | Priority: High", size: 14, color: "#7f8c8d")
+            }
+            
+            Container(margin: 20, padding: 20, backgroundColor: "#f8f9fa") {
+              Text("🟡 Write documentation", size: 18, weight: "bold", color: "#f39c12")
+              Text("Status: Todo | Priority: Medium", size: 14, color: "#7f8c8d")
+            }
+            
+            Container(margin: 20, padding: 20, backgroundColor: "#e8f8f5") {
+              Text("✅ User testing", size: 18, weight: "bold", color: "#27ae60")
+              Text("Status: Completed | Priority: Medium", size: 14, color: "#7f8c8d")
+            }
+          }
+          
+          Container(margin: 40) {
+            Button("View All Tasks", color: "#3498db", size: 18)
+            Button("Create New Task", color: "#2ecc71", size: 18)
+            Button("Analytics", color: "#9b59b6", size: 18)
+            Button("Settings", color: "#95a5a6", size: 16)
+          }
+          
+          Container(margin: 40, padding: 25, backgroundColor: "#d5f4e6") {
+            Text("🎉 System Status", size: 20, weight: "bold", color: "#27ae60")
+            Text("✓ All systems operational", size: 16, color: "#27ae60")
+            Text("✓ Database connected", size: 16, color: "#27ae60")
+            Text("✓ Server running on port 3000", size: 16, color: "#27ae60")
+          }
+          
+          Container(margin: 30, padding: 20, backgroundColor: "#34495e") {
+            Text("Built with Nova Framework", size: 14, color: "#ecf0f1")
+            Text("Full-stack application in a single file", size: 12, color: "#95a5a6")
+          }
+        }
+      }
+    }
+    
+    print("🌍 Starting web server on port 3000...")
+    print("📱 Access your app at: http://localhost:3000")
+    print("✅ Server ready! Press Ctrl+C to stop\n")
+    
+    serveHTTP(ui, 3000)
+  }
+}
+
+let app = TaskFlowApp()
+app.render()

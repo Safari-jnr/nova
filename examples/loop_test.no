@@ -1,0 +1,9 @@
+let arr = [1, 2, 3]
+
+print(100)
+
+for x in arr {
+  print(x)
+}
+
+print(200)

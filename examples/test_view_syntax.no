@@ -1,0 +1,27 @@
+// Phase 2.5: View Syntax Test
+
+print("=== Phase 2.5: View Syntax ===\n")
+
+component HelloWorld {
+  state = {
+    message: "Hello from View!"
+  }
+  
+  fn render() {
+    let ui = view {
+      Text("Hello World")
+    }
+    
+    print("View created:")
+    print(ui)
+  }
+}
+
+let app = HelloWorld()
+print("Component created\n")
+
+print("Calling render with view:")
+app.render()
+
+print("\n=== View Syntax Test Complete ===")
+cd desktop

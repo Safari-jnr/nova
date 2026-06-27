@@ -1,0 +1,526 @@
+// ═══════════════════════════════════════════════════════════════════
+// TaskFlow - Complete Task Management Web Application
+// Built with Nova Framework
+// ═══════════════════════════════════════════════════════════════════
+
+print("╔══════════════════════════════════════════════════╗")
+print("║         TaskFlow - Task Management System        ║")
+print("║              Built with Nova Framework           ║")
+print("╚══════════════════════════════════════════════════╝\n")
+
+// ═══════════════════════════════════════════════════════════════════
+// DATABASE SETUP
+// ═══════════════════════════════════════════════════════════════════
+
+print("📊 Initializing database...")
+
+// Simulate database with initial data
+let tasks = [
+  { id: 1, title: "Design landing page", project: "Website Redesign", status: "in-progress", priority: "high", dueDate: "2026-02-15" },
+  { id: 2, title: "Implement authentication", project: "Backend API", status: "todo", priority: "high", dueDate: "2026-02-20" },
+  { id: 3, title: "Write documentation", project: "Backend API", status: "todo", priority: "medium", dueDate: "2026-02-18" },
+  { id: 4, title: "User testing", project: "Website Redesign", status: "done", priority: "medium", dueDate: "2026-02-10" },
+  { id: 5, title: "Deploy to production", project: "Backend API", status: "todo", priority: "high", dueDate: "2026-02-25" },
+  { id: 6, title: "Bug fixes", project: "Mobile App", status: "in-progress", priority: "low", dueDate: "2026-02-12" }
+]
+
+let projects = [
+  { id: 1, name: "Website Redesign", tasks: 2, completed: 1, color: "#3498db" },
+  { id: 2, name: "Backend API", tasks: 3, completed: 0, color: "#2ecc71" },
+  { id: 3, name: "Mobile App", tasks: 1, completed: 0, color: "#e74c3c" }
+]
+
+let stats = {
+  totalTasks: 6,
+  completedTasks: 1,
+  inProgressTasks: 2,
+  todoTasks: 3,
+  totalProjects: 3,
+  activeUsers: 1
+}
+
+print("✅ Database initialized with sample data\n")
+
+// ═══════════════════════════════════════════════════════════════════
+// PAGE 1: DASHBOARD
+// ═══════════════════════════════════════════════════════════════════
+
+component Dashboard {
+  state = {
+    appName: "TaskFlow",
+    user: { name: "Alex Morgan", role: "Project Manager" },
+    stats: {
+      totalTasks: 6,
+      completedTasks: 1,
+      inProgressTasks: 2,
+      todoTasks: 3,
+      totalProjects: 3,
+      activeUsers: 1
+    },
+    recentTasks: []
+  }
+  
+  fn render() {
+    print("📱 Rendering Dashboard...\n")
+    
+    let ui = view {
+      Container(padding: 0, backgroundColor: "#f8f9fa") {
+        Container(padding: 30, backgroundColor: "#2c3e50") {
+          Text(this.state.appName, size: 36, weight: "bold", color: "#ffffff")
+          Text("Welcome back, Alex Morgan", size: 18, color: "#ecf0f1")
+        }
+        
+        Container(padding: 30) {
+          Text("Dashboard Overview", size: 28, weight: "bold", color: "#2c3e50")
+          
+          Container(margin: 20) {
+            Container(padding: 25, backgroundColor: "#3498db") {
+              Text("Total Tasks", size: 16, weight: "bold", color: "#ffffff")
+              Text(this.state.stats.totalTasks, size: 42, weight: "bold", color: "#ffffff")
+            }
+            
+            Container(padding: 25, backgroundColor: "#2ecc71") {
+              Text("Completed", size: 16, weight: "bold", color: "#ffffff")
+              Text(this.state.stats.completedTasks, size: 42, weight: "bold", color: "#ffffff")
+            }
+            
+            Container(padding: 25, backgroundColor: "#e74c3c") {
+              Text("In Progress", size: 16, weight: "bold", color: "#ffffff")
+              Text(this.state.stats.inProgressTasks, size: 42, weight: "bold", color: "#ffffff")
+            }
+            
+            Container(padding: 25, backgroundColor: "#f39c12") {
+              Text("Todo", size: 16, weight: "bold", color: "#ffffff")
+              Text(this.state.stats.todoTasks, size: 42, weight: "bold", color: "#ffffff")
+            }
+          }
+          
+          Container(margin: 30, padding: 25, backgroundColor: "#ffffff") {
+            Text("Recent Tasks", size: 22, weight: "bold", color: "#2c3e50")
+            
+            Container(margin: 15) {
+              Text("✓ Design landing page (In Progress)", size: 16, color: "#3498db")
+              Text("• Implement authentication (Todo)", size: 16, color: "#95a5a6")
+              Text("• Bug fixes (In Progress)", size: 16, color: "#3498db")
+            }
+          }
+          
+          Container(margin: 20) {
+            Button("View All Tasks", color: "#3498db", size: 16)
+            Button("New Task", color: "#2ecc71", size: 16)
+          }
+        }
+      }
+    }
+    
+    print(renderConsole(ui))
+    print("\n✅ Dashboard rendered successfully\n")
+  }
+}
+
+let dashboard = Dashboard()
+dashboard.render()
+
+print("─────────────────────────────────────────────────────\n")
+
+// ═══════════════════════════════════════════════════════════════════
+// PAGE 2: TASKS LIST
+// ═══════════════════════════════════════════════════════════════════
+
+component TasksPage {
+  state = {
+    tasks: [],
+    filter: "all",
+    sortBy: "priority"
+  }
+  
+  fn render() {
+    print("📋 Rendering Tasks Page...\n")
+    
+    let ui = view {
+      Container(padding: 0, backgroundColor: "#f8f9fa") {
+        Container(padding: 30, backgroundColor: "#34495e") {
+          Text("Tasks", size: 32, weight: "bold", color: "#ffffff")
+          Text("Manage all your tasks in one place", size: 16, color: "#ecf0f1")
+        }
+        
+        Container(padding: 30) {
+          Container(margin: 20, padding: 20, backgroundColor: "#ffffff") {
+            Text("Filter & Sort", size: 18, weight: "bold")
+            
+            Container(margin: 15) {
+              Button("All Tasks", color: "#3498db")
+              Button("In Progress", color: "#f39c12")
+              Button("Completed", color: "#2ecc71")
+              Button("High Priority", color: "#e74c3c")
+            }
+          }
+          
+          Container(margin: 30) {
+            Text("Task List", size: 24, weight: "bold")
+            
+            Container(margin: 20, padding: 20, backgroundColor: "#ffffff") {
+              Text("🔴 Design landing page", size: 18, weight: "bold", color: "#e74c3c")
+              Text("Project: Website Redesign | Due: Feb 15", size: 14, color: "#7f8c8d")
+              Text("Status: In Progress", size: 14, color: "#3498db")
+            }
+            
+            Container(margin: 20, padding: 20, backgroundColor: "#ffffff") {
+              Text(" Implement authentication", size: 18, weight: "bold", color: "#e74c3c")
+              Text("Project: Backend API | Due: Feb 20", size: 14, color: "#7f8c8d")
+              Text("Status: Todo", size: 14, color: "#95a5a6")
+            }
+            
+            Container(margin: 20, padding: 20, backgroundColor: "#ffffff") {
+              Text(" Write documentation", size: 18, weight: "bold", color: "#f39c12")
+              Text("Project: Backend API | Due: Feb 18", size: 14, color: "#7f8c8d")
+              Text("Status: Todo", size: 14, color: "#95a5a6")
+            }
+            
+            Container(margin: 20, padding: 20, backgroundColor: "#e8f8f5") {
+              Text(" User testing", size: 18, weight: "bold", color: "#27ae60")
+              Text("Project: Website Redesign | Due: Feb 10", size: 14, color: "#7f8c8d")
+              Text("Status: Completed", size: 14, color: "#2ecc71")
+            }
+          }
+          
+          Container(margin: 20) {
+            Button("Add New Task", color: "#2ecc71", size: 18)
+            Button("Export List", color: "#95a5a6", size: 16)
+          }
+        }
+      }
+    }
+    
+    print(renderConsole(ui))
+    print("\n Tasks page rendered successfully\n")
+  }
+}
+
+let tasksPage = TasksPage()
+tasksPage.render()
+
+print("─────────────────────────────────────────────────────\n")
+
+// ═══════════════════════════════════════════════════════════════════
+// PAGE 3: PROJECTS
+// ═══════════════════════════════════════════════════════════════════
+
+component ProjectsPage {
+  state = {
+    projects: [],
+    totalProjects: 3
+  }
+  
+  fn render() {
+    print(" Rendering Projects Page...\n")
+    
+    let ui = view {
+      Container(padding: 0, backgroundColor: "#f8f9fa") {
+        Container(padding: 30, backgroundColor: "#16a085") {
+          Text("Projects", size: 32, weight: "bold", color: "#ffffff")
+          Text("Organize tasks by project", size: 16, color: "#ecf0f1")
+        }
+        
+        Container(padding: 30) {
+          Text("Active Projects", size: 28, weight: "bold")
+          
+          Container(margin: 20, padding: 25, backgroundColor: "#ffffff") {
+            Container(padding: 15, backgroundColor: "#3498db") {
+              Text("Website Redesign", size: 22, weight: "bold", color: "#ffffff")
+            }
+            
+            Container(margin: 15) {
+              Text("Tasks: 2 total | 1 completed", size: 16, color: "#7f8c8d")
+              Text("Progress: 50%", size: 16, color: "#3498db")
+              Text("Team: 3 members", size: 14, color: "#95a5a6")
+            }
+            
+            Container(margin: 15) {
+              Button("View Tasks", color: "#3498db")
+              Button("Edit Project", color: "#95a5a6")
+            }
+          }
+          
+          Container(margin: 20, padding: 25, backgroundColor: "#ffffff") {
+            Container(padding: 15, backgroundColor: "#2ecc71") {
+              Text("Backend API", size: 22, weight: "bold", color: "#ffffff")
+            }
+            
+            Container(margin: 15) {
+              Text("Tasks: 3 total | 0 completed", size: 16, color: "#7f8c8d")
+              Text("Progress: 0%", size: 16, color: "#e74c3c")
+              Text("Team: 2 members", size: 14, color: "#95a5a6")
+            }
+            
+            Container(margin: 15) {
+              Button("View Tasks", color: "#2ecc71")
+              Button("Edit Project", color: "#95a5a6")
+            }
+          }
+          
+          Container(margin: 20, padding: 25, backgroundColor: "#ffffff") {
+            Container(padding: 15, backgroundColor: "#e74c3c") {
+              Text("Mobile App", size: 22, weight: "bold", color: "#ffffff")
+            }
+            
+            Container(margin: 15) {
+              Text("Tasks: 1 total | 0 completed", size: 16, color: "#7f8c8d")
+              Text("Progress: 0%", size: 16, color: "#e74c3c")
+              Text("Team: 4 members", size: 14, color: "#95a5a6")
+            }
+            
+            Container(margin: 15) {
+              Button("View Tasks", color: "#e74c3c")
+              Button("Edit Project", color: "#95a5a6")
+            }
+          }
+          
+          Container(margin: 30) {
+            Button("Create New Project", color: "#2ecc71", size: 18)
+          }
+        }
+      }
+    }
+    
+    print(renderConsole(ui))
+    print("\n Projects page rendered successfully\n")
+  }
+}
+
+let projectsPage = ProjectsPage()
+projectsPage.render()
+
+print("─────────────────────────────────────────────────────\n")
+
+// ═══════════════════════════════════════════════════════════════════
+// PAGE 4: ANALYTICS
+// ═══════════════════════════════════════════════════════════════════
+
+component AnalyticsPage {
+  state = {
+    stats: {
+      totalTasks: 6,
+      completedTasks: 1,
+      inProgressTasks: 2,
+      todoTasks: 3
+    },
+    productivity: {
+      thisWeek: 12,
+      lastWeek: 8,
+      trend: "up"
+    },
+    timeSpent: {
+      design: 45,
+      development: 30,
+      testing: 15,
+      meetings: 10
+    }
+  }
+  
+  fn render() {
+    print(" Rendering Analytics Page...\n")
+    
+    let ui = view {
+      Container(padding: 0, backgroundColor: "#f8f9fa") {
+        Container(padding: 30, backgroundColor: "#8e44ad") {
+          Text("Analytics", size: 32, weight: "bold", color: "#ffffff")
+          Text("Track your productivity and progress", size: 16, color: "#ecf0f1")
+        }
+        
+        Container(padding: 30) {
+          Text("Performance Overview", size: 28, weight: "bold")
+          
+          Container(margin: 20) {
+            Container(padding: 25, backgroundColor: "#ffffff") {
+              Text("Tasks Completed", size: 18, weight: "bold")
+              Text("This Week: 12 tasks", size: 16, color: "#2ecc71")
+              Text("Last Week: 8 tasks", size: 16, color: "#95a5a6")
+              Text("Trend: ↑ 50% increase", size: 16, weight: "bold", color: "#2ecc71")
+            }
+            
+            Container(padding: 25, backgroundColor: "#ffffff") {
+              Text("Completion Rate", size: 18, weight: "bold")
+              Text("Overall: 17%", size: 24, color: "#3498db")
+              Text("Target: 80%", size: 16, color: "#95a5a6")
+            }
+            
+            Container(padding: 25, backgroundColor: "#ffffff") {
+              Text("Average Time", size: 18, weight: "bold")
+              Text("Per Task: 2.5 hours", size: 16, color: "#f39c12")
+              Text("Per Project: 15 hours", size: 16, color: "#f39c12")
+            }
+          }
+          
+          Container(margin: 30, padding: 25, backgroundColor: "#ffffff") {
+            Text("Time Distribution", size: 22, weight: "bold")
+            
+            Container(margin: 15) {
+              Text("Design: 45%", size: 16, color: "#3498db")
+              Text("Development: 30%", size: 16, color: "#2ecc71")
+              Text("Testing: 15%", size: 16, color: "#f39c12")
+              Text("Meetings: 10%", size: 16, color: "#e74c3c")
+            }
+          }
+          
+          Container(margin: 30, padding: 25, backgroundColor: "#d5f4e6") {
+            Text(" Insights", size: 20, weight: "bold", color: "#27ae60")
+            Text("✓ Productivity is up 50% this week!", size: 16)
+            Text("✓ You're on track to meet your monthly goals", size: 16)
+            Text("⚠ Consider allocating more time to testing", size: 16, color: "#f39c12")
+          }
+          
+          Container(margin: 20) {
+            Button("Download Report", color: "#3498db")
+            Button("View Details", color: "#95a5a6")
+          }
+        }
+      }
+    }
+    
+    print(renderConsole(ui))
+    print("\n Analytics page rendered successfully\n")
+  }
+}
+
+let analyticsPage = AnalyticsPage()
+analyticsPage.render()
+
+print("─────────────────────────────────────────────────────\n")
+
+// ═══════════════════════════════════════════════════════════════════
+// PAGE 5: SETTINGS
+// ═══════════════════════════════════════════════════════════════════
+
+component SettingsPage {
+  state = {
+    user: {
+      name: "Alex Morgan",
+      email: "alex.morgan@taskflow.dev",
+      role: "Project Manager",
+      avatar: "AM"
+    },
+    preferences: {
+      theme: "light",
+      notifications: true,
+      emailUpdates: true,
+      language: "English"
+    },
+    team: {
+      name: "Development Team",
+      members: 5,
+      plan: "Pro"
+    }
+  }
+  
+  fn render() {
+    print("  Rendering Settings Page...\n")
+    
+    let ui = view {
+      Container(padding: 0, backgroundColor: "#f8f9fa") {
+        Container(padding: 30, backgroundColor: "#34495e") {
+          Text("Settings", size: 32, weight: "bold", color: "#ffffff")
+          Text("Manage your account and preferences", size: 16, color: "#ecf0f1")
+        }
+        
+        Container(padding: 30) {
+          Container(margin: 20, padding: 25, backgroundColor: "#ffffff") {
+            Text("Profile Information", size: 22, weight: "bold")
+            
+            Container(margin: 15) {
+              Text("Name: Alex Morgan", size: 16)
+              Text("Email: alex.morgan@taskflow.dev", size: 16, color: "#7f8c8d")
+              Text("Role: Project Manager", size: 16, color: "#3498db")
+            }
+            
+            Container(margin: 15) {
+              Button("Edit Profile", color: "#3498db")
+              Button("Change Password", color: "#95a5a6")
+            }
+          }
+          
+          Container(margin: 20, padding: 25, backgroundColor: "#ffffff") {
+            Text("Preferences", size: 22, weight: "bold")
+            
+            Container(margin: 15) {
+              Text("Theme: Light Mode", size: 16)
+              Text("Notifications: Enabled", size: 16, color: "#2ecc71")
+              Text("Email Updates: Enabled", size: 16, color: "#2ecc71")
+              Text("Language: English", size: 16)
+            }
+            
+            Container(margin: 15) {
+              Button("Update Preferences", color: "#3498db")
+            }
+          }
+          
+          Container(margin: 20, padding: 25, backgroundColor: "#ffffff") {
+            Text("Team Settings", size: 22, weight: "bold")
+            
+            Container(margin: 15) {
+              Text("Team: Development Team", size: 16)
+              Text("Members: 5 active users", size: 16)
+              Text("Plan: Pro ($29/month)", size: 16, color: "#2ecc71")
+            }
+            
+            Container(margin: 15) {
+              Button("Manage Team", color: "#3498db")
+              Button("Upgrade Plan", color: "#2ecc71")
+            }
+          }
+          
+          Container(margin: 30, padding: 20, backgroundColor: "#fef5e7") {
+            Text("  Danger Zone", size: 18, weight: "bold", color: "#e67e22")
+            Text("Permanently delete your account and all data", size: 14, color: "#95a5a6")
+            
+            Container(margin: 15) {
+              Button("Delete Account", color: "#e74c3c")
+            }
+          }
+        }
+      }
+    }
+    
+    print(renderConsole(ui))
+    print("\n Settings page rendered successfully\n")
+  }
+}
+
+let settingsPage = SettingsPage()
+settingsPage.render()
+
+print("═════════════════════════════════════════════════════\n")
+
+// ═══════════════════════════════════════════════════════════════════
+// SUMMARY
+// ═══════════════════════════════════════════════════════════════════
+
+print(" TaskFlow Application Complete!\n")
+print("═════════════════════════════════════════════════════\n")
+print(" Application Summary:")
+print("  • 5 complete pages rendered")
+print("  • Dashboard with overview")
+print("  • Tasks management")
+print("  • Projects organization")
+print("  • Analytics & insights")
+print("  • Settings & preferences")
+print("\n Features:")
+print("  • Component-based architecture")
+print("  • State management")
+print("  • Beautiful UI with styling")
+print("  • Database integration ready")
+print("  • Multi-page navigation")
+print("\n To deploy as web service:")
+print("  1. Choose any page component")
+//print("  2. Call: serveHTTP(ui, 3000)")
+//print("  3. Access at: http://localhost:3000")
+print("📱 Access your app at: http://localhost:3000")
+    print(" Server ready! Press Ctrl+C to stop\n")
+    
+    serveHTTP(ui, 3000)
+print("\n To export as static HTML:")
+print("  1. Generate HTML: let html = renderHTML(ui)")
+print("  2. Save file: writeFile('index.html', html)")
+print("\n═════════════════════════════════════════════════════")
+print(" Built with Nova Framework - Full-Stack in One File!")
+print("═════════════════════════════════════════════════════\n")

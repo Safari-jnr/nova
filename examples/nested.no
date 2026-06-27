@@ -1,0 +1,11 @@
+fn double(x) {
+  return x * 2
+}
+
+fn quadruple(x) {
+  let temp = double(x)
+  return double(temp)
+}
+
+let result = quadruple(5)
+print(result)

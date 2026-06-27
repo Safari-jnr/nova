@@ -1,0 +1,99 @@
+// Phase 1 Core Language Features Test
+
+print("=== PART 1: Objects/Dictionaries ===")
+
+let user = {
+  name: "Alice",
+  age: 25,
+  city: "NYC"
+}
+print("User:")
+print(user)
+print("Name: ")
+print(user.name)
+print("Age: ")
+print(user.age)
+
+print("\n=== PART 2: Nested Objects ===")
+
+let company = {
+  name: "TechCorp",
+  ceo: {
+    name: "Bob",
+    age: 45
+  }
+}
+print("Company:")
+print(company.name)
+print("CEO:")
+print(company.ceo.name)
+
+print("\n=== PART 3: Compound Assignment Operators ===")
+
+let x = 10
+print("Initial x:")
+print(x)
+
+x += 5
+print("After x += 5:")
+print(x)
+
+x -= 3
+print("After x -= 3:")
+print(x)
+
+x *= 2
+print("After x *= 2:")
+print(x)
+
+x /= 4
+print("After x /= 4:")
+print(x)
+
+print("\n=== PART 4: Objects with Arrays ===")
+
+let data = {
+  numbers: [1, 2, 3, 4, 5],
+  total: 15
+}
+print("Data numbers:")
+print(data.numbers)
+print("Data total:")
+print(data.total)
+
+print("\n=== PART 5: Complex Nested Structure ===")
+
+let app = {
+  name: "MyApp",
+  version: "1.0.0",
+  users: [
+    { name: "Alice", role: "admin" },
+    { name: "Bob", role: "user" }
+  ],
+  settings: {
+    theme: "dark",
+    language: "en"
+  }
+}
+print("App name:")
+print(app.name)
+print("Users:")
+print(app.users)
+print("Theme:")
+print(app.settings.theme)
+
+print("\n=== PART 6: Combining Everything ===")
+
+let counter = { value: 0 }
+print("Initial counter:")
+print(counter.value)
+
+counter.value += 10
+print("After += 10:")
+print(counter.value)
+
+counter.value *= 2
+print("After *= 2:")
+print(counter.value)
+
+print("\n=== ALL PHASE 1 TESTS COMPLETED! ===")

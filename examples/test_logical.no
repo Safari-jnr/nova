@@ -1,0 +1,68 @@
+// Test logical operator symbols in Nova
+
+print("=== AND Operator (&&) ===")
+let x = 5
+let y = 10
+
+if x > 0 && y > 0 {
+  print("Both positive")
+}
+
+if x > 0 && y < 5 {
+  print("Should not print")
+} else {
+  print("Second condition failed")
+}
+
+print("\n=== OR Operator (||) ===")
+let a = 0
+let b = 15
+
+if a > 10 || b > 10 {
+  print("At least one greater than 10")
+}
+
+if a > 10 || b < 10 {
+  print("Should not print")
+} else {
+  print("Both conditions failed")
+}
+
+print("\n=== NOT Operator (!) ===")
+let is_valid = false
+if !is_valid {
+  print("Not valid!")
+}
+
+let is_ready = true
+if !is_ready {
+  print("Should not print")
+} else {
+  print("Is ready!")
+}
+
+print("\n=== Complex Combinations ===")
+let age = 25
+let has_license = true
+let is_sober = true
+
+if age >= 18 && has_license && is_sober {
+  print("Can drive!")
+}
+
+if age < 16 || !has_license || !is_sober {
+  print("Should not print")
+} else {
+  print("All checks passed")
+}
+
+print("\n=== Mixing Styles ===")
+if x > 0 and y > 0 {
+  print("Keywords work too")
+}
+
+if !is_valid or age < 18 {
+  print("Can mix symbols and keywords")
+}
+
+print("\n=== All logical operator tests completed! ===")
